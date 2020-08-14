@@ -23,7 +23,8 @@ class User(db.Model):
 
 @app.route('/')
 def index():
-    all_data = User.query.all()
+    # all_data = User.query.all()
+    all_data = User.query.order_by(User.id.desc()).all()
     return render_template("index.html", employees = all_data)
 
 @app.route('/insert', methods=['POST'])
