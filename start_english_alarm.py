@@ -1,4 +1,4 @@
-from flask_english_alarm import app
+from english_alarm import app
 
 if __name__ == "__main__":
     app.run(debug=True)
