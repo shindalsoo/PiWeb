@@ -20,7 +20,6 @@ class User(db.Model):
         self.email = email
         self.phone = phone
 
-
 @app.route('/')
 def index():
     # all_data = User.query.all()
@@ -28,7 +27,7 @@ def index():
     return render_template("index.html", employees = all_data)
 
 @app.route('/insert', methods=['POST'])
-def insert():
+def insertUser():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
@@ -38,7 +37,7 @@ def insert():
         db.session.add(inputUser)
         db.session.commit()
 
-        flash(u"직원이 성공적으로 등록되었습니다.") # 한글은 앞에 u넣기
+        flash(u"직원이 성공적으로 등록되었습니다.","success") # 한글은 앞에 u넣기
 
         return redirect(url_for('index'))
 
@@ -52,7 +51,8 @@ def update():
 
         db.session.commit()
 
-        flash(u"직원이 성공적으로 수정되었습니다.")        
+        flash(u"직원이 성공적으로 수정되었습니다.","success")
+        flash(u"수고하셨습니다.","success")
 
         return redirect(url_for('index'))
 
@@ -61,7 +61,7 @@ def delete(id):
     deleteUser = User.query.get(id)
     db.session.delete(deleteUser)
     db.session.commit()
-    flash(u"직원이 성공적으로 삭제되었습니다.")
+    flash(u"직원이 성공적으로 삭제되었습니다.","success")
     return redirect(url_for('index'))
     
 @app.route('/test')
