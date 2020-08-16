@@ -241,12 +241,12 @@ $$('.ptr-content').on('ptr:refresh', function (e) {
     '</div>'+
     '<a href="/single/">'+
       '<div class="card">'+
-        '<img class="card-image" src="img/thumb-14.jpg" alt="">'+
+        '<img class="card-image" src="/static/img/thumb-14.jpg" alt="">'+
         '<div class="card-infos">'+
           '<h2 class="card-title">How to Get Your First Tattoo Right</h2>'+
           '<div class="card-bottom">'+
             '<div class="card-author">'+
-              '<img class="card-author-image" src="img/authors/author-1.jpg" alt="">'+
+              '<img class="card-author-image" src="/static/img/authors/author-1.jpg" alt="">'+
               '<div>Camille Aline</div>'+
             '</div>'+
             '<div class="card-comments"><i class="f7-icons">chat_bubble_fill</i></i>3</div>'+
@@ -283,11 +283,11 @@ $$('.infinite-scroll-content').on('infinite', function () {
     '<li>'+
       '<a href="/single/">'+
         '<div class="item-content">'+
-          '<div class="item-media"><img src="img/thumb-15.jpg" width="44"/></div>'+
+          '<div class="item-media"><img src="/static/img/thumb-15.jpg" width="44"/></div>'+
           '<div class="item-inner">'+
             '<div class="item-subtitle">Fashion</div>'+
             '<div class="item-title">Archery at the 2024 Olympic Games</div>'+
-            '<div class="item-subtitle bottom-subtitle"><img src="img/authors/author-3.jpg">Jess Roxana</div>'+
+            '<div class="item-subtitle bottom-subtitle"><img src="/static/img/authors/author-3.jpg">Jess Roxana</div>'+
           '</div>'+
         '</div>'+
       '</a>'+
@@ -295,11 +295,11 @@ $$('.infinite-scroll-content').on('infinite', function () {
     '<li>'+
       '<a href="/single/">'+
         '<div class="item-content">'+
-          '<div class="item-media"><img src="img/thumb-16.jpg" width="44"/></div>'+
+          '<div class="item-media"><img src="/static/img/thumb-16.jpg" width="44"/></div>'+
           '<div class="item-inner">'+
             '<div class="item-subtitle">Fashion</div>'+
             '<div class="item-title">Most Beautiful Beach of the Costa Brava</div>'+
-            '<div class="item-subtitle bottom-subtitle"><img src="img/authors/author-2.jpg">Zorka Ivka</div>'+
+            '<div class="item-subtitle bottom-subtitle"><img src="/static/img/authors/author-2.jpg">Zorka Ivka</div>'+
           '</div>'+
         '</div>'+
       '</a>'+
@@ -348,7 +348,7 @@ $$(document).on('page:init', '.page[data-name="pull-to-refresh"]', function (e) 
       '<li>'+
         '<a href="/single/">'+
           '<div class="item-content">'+
-            '<div class="item-media"><img src="img/thumb-25.jpg" width="44"/></div>'+
+            '<div class="item-media"><img src="/static/img/thumb-25.jpg" width="44"/></div>'+
             '<div class="item-inner">'+
               '<div class="item-subtitle">Fashion</div>'+
               '<div class="item-title">The Best Diet for a Flatter Belly</div>'+
@@ -385,7 +385,7 @@ $$(document).on('page:init', '.page[data-name="infinite-scroll"]', function (e) 
       '<li>'+
         '<a href="/single/">'+
           '<div class="item-content">'+
-            '<div class="item-media"><img src="img/thumb-26.jpg" width="44"/></div>'+
+            '<div class="item-media"><img src="/static/img/thumb-26.jpg" width="44"/></div>'+
             '<div class="item-inner">'+
               '<div class="item-subtitle">Fashion</div>'+
               '<div class="item-title">The Best Diet for a Flatter Belly</div>'+
