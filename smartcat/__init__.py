@@ -10,3 +10,6 @@ def index():
 def pages(page):
     return render_template('/pages/'+page)
     
+@app.route('/contents/<page>')
+def contents(page):
+    return render_template('/contents/'+page)

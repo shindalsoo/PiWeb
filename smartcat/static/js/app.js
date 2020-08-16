@@ -21,6 +21,10 @@ var app = new Framework7({
       url: 'pages/single.html',
     },
     {
+      path: '/contents/:cid/',
+      url: 'contents/cid_{{cid}}.html'
+    },
+    {
       path: '/single-2/',
       url: 'pages/single-2.html',
     },
@@ -119,6 +123,10 @@ var app = new Framework7({
     {
       path: '/promo-banner/',
       url: 'pages/promo-banner.html',
+    },
+    {
+      path: '(.*)',
+      url: 'pages/404.html'
     }
   ]
 });
