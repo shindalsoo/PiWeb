@@ -17,12 +17,16 @@ var app = new Framework7({
       url: 'index.html',
     },
     {
-      path: '/single/',
-      url: 'pages/single.html',
-    },
-    {
       path: '/contents/:cid/',
       url: 'contents/cid_{{cid}}.html'
+    },
+    {
+      path: '/bbs/:cid',
+      url: 'bbs/list.html'
+    },
+    {
+      path: '/single/',
+      url: 'pages/single.html',
     },
     {
       path: '/single-2/',

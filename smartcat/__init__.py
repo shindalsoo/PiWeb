@@ -13,3 +13,7 @@ def pages(page):
 @app.route('/contents/<page>')
 def contents(page):
     return render_template('/contents/'+page)
+
+@app.route('/bbs/<page>')
+def bbs(page):
+    return render_template('/bbs/'+page)
