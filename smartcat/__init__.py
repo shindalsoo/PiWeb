@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+import datetime
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -12,10 +13,11 @@ class LangAlarmWord(db.Model):
     __tablename__ = 'tblLangAlarmWord'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     category = db.Column(db.String(30), unique=False, nullable=True)
-    word = db.Column(db.String(100), unique=True, nullable=False)
+    word = db.Column(db.String(100), unique=False, nullable=False)
     memo = db.Column(db.String(200), unique=False, nullable=True)
     cntplayed = db.Column(db.Integer, unique=False, nullable=True)
     useyn = db.Column(db.String(1), unique=False, nullable=True)
+    regdate = db.Column(db.DateTime(timezone=True), default=datetime.datetime.now)
 
     def __init__(self, category, word, memo):
         self.category = category
@@ -36,5 +38,15 @@ def contents(page):
 
 @app.route('/bbs/<page>')
 def bbs(page):
-    all_data = LangAlarmWord.query.all()
+    all_data = LangAlarmWord.query.order_by(LangAlarmWord.id.desc()).all()
     return render_template('/bbs/'+page, langwords = all_data)
+
+@app.route('/bbs_insert', methods=['POST'])
+def bbsinsert():
+    category = request.form['category']
+    word = request.form['word']
+    memo = request.form['memo']
+    newWord = LangAlarmWord(category,word,memo)
+    db.session.add(newWord)
+    db.session.commit()
+    return "success"
