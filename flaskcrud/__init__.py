@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Employee(db.Model):
-    userid = db.Column(db.Integer, primary_key = True)
+    userid = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(100))
     email = db.Column(db.String(200))
     tel = db.Column(db.String(50))
@@ -54,3 +54,9 @@ def update():
         updateUser.tel = request.form['tel']
         db.session.commit()
         return redirect(url_for('index'))
+
+@app.route('/search', methods=['POST'])
+def search():
+    txtsearch = request.form['txtsearch']
+    searchUser = Employee.query.filter(Employee.username.contains(txtsearch))
+    return render_template("index.html", employees=searchUser, txtsearch=txtsearch)
