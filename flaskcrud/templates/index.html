@@ -20,6 +20,7 @@
         {{row.tel}}
         <input type="button" value="삭제" onclick="fDel({{row.userid}})">
         <input type="button" value="수정" onclick="fEdit('{{row.userid}}','{{row.username}}','{{row.email}}','{{row.tel}}')">
+        <input type="button" value="말하기" onclick="fSound()">
         <br>
     {% endfor %}
 
@@ -51,6 +52,9 @@ function fEdit(userid,username,email,tel){
         frm.username.value = username;
         frm.email.value = email;
         frm.tel.value = tel;
+}
+function fSound(){
+    location.href = "/playmp3";
 }
 </script>
 </body>
