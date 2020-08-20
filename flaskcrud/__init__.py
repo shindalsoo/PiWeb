@@ -1,69 +1,56 @@
-# -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///crud.db' #'mysql://root:''@localhost/crud'
-app.config['SQlALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///shindalsoo.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    phone = db.Column(db.String(100), unique=True, nullable=False)
+class Employee(db.Model):
+    userid = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(100))
+    email = db.Column(db.String(200))
+    tel = db.Column(db.String(50))
 
-    def __init__(self, username, email, phone):
+    def __init__(self, username, email, tel):
         self.username = username
         self.email = email
-        self.phone = phone
+        self.tel = tel
 
 @app.route('/')
 def index():
-    # all_data = User.query.all()
-    all_data = User.query.order_by(User.id.desc()).all()
-    return render_template("index.html", employees = all_data)
+    all_data = Employee.query.order_by(Employee.userid.desc()).all() # select * from employee
+    return render_template("index.html", employees=all_data)
 
 @app.route('/insert', methods=['POST'])
-def insertUser():
+def insert():
     if request.method == 'POST':
         username = request.form['username']
         email = request.form['email']
-        phone = request.form['phone']
+        tel = request.form['tel']
 
-        inputUser = User(username,email,phone)
-        db.session.add(inputUser)
+        insertUser = Employee(username,email,tel)
+        db.session.add(insertUser)
         db.session.commit()
-
-        flash(u"직원이 성공적으로 등록되었습니다.","success") # 한글은 앞에 u넣기
 
         return redirect(url_for('index'))
 
-@app.route('/update', methods=['GET','POST'])
+@app.route('/delete/<uid>')
+def delete(uid):
+    delUser = Employee.query.get(uid) # select * from Employee where userid=3
+    db.session.delete(delUser)
+    db.session.commit()
+
+    return redirect(url_for('index'))
+
+@app.route('/update', methods=['POST'])
 def update():
     if request.method == 'POST':
-        inputUser = User.query.get(request.form.get('id'))
-        inputUser.username = request.form['username']
-        inputUser.email = request.form['email']
-        inputUser.phone = request.form['phone']
-
+        updateUser = Employee.query.get(request.form.get('userid'))
+        updateUser.username = request.form['username']
+        updateUser.email = request.form['email']
+        updateUser.tel = request.form['tel']
         db.session.commit()
-
-        flash(u"직원이 성공적으로 수정되었습니다.","success")
-        flash(u"수고하셨습니다.","success")
-
         return redirect(url_for('index'))
-
-@app.route('/delete/<id>', methods=['GET','POST'])
-def delete(id):
-    deleteUser = User.query.get(id)
-    db.session.delete(deleteUser)
-    db.session.commit()
-    flash(u"직원이 성공적으로 삭제되었습니다.","success")
-    return redirect(url_for('index'))
-    
-@app.route('/test')
-def test():
-    return "한글테스트"
