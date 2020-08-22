@@ -19,8 +19,8 @@
         {{row.email}}
         {{row.tel}}
         <input type="button" value="삭제" onclick="fDel({{row.userid}})">
-        <input type="button" value="수정" onclick="fEdit('{{row.userid}}','{{row.username}}','{{row.email}}','{{row.tel}}')">
-        <input type="button" value="말하기" onclick="fSound()">
+        <input type="button" value="수정">
+        
         <br>
     {% endfor %}
 
@@ -41,11 +41,18 @@
     <input type="submit" value="수정하기">
 </form>
 
+    
 <script>
 function fDel(uid){
     if (confirm(uid+"를 정말로 삭제하시겠습니까?")==false) return;
     location.href = "/delete/"+uid;
 }
+function fUpdate(){
+    alert("수정할꺼니?");
+}
+
+
+
 function fEdit(userid,username,email,tel){
     var frm = document.frmEdit;
         frm.userid.value = userid;
