@@ -21,8 +21,13 @@ var app = new Framework7({
       url: 'contents/cid_{{cid}}.html'
     },
     {
-      path: '/bbs/:page',
-      url: 'bbs/{{page}}.html'
+      path: '/bbs/:page/:id',
+      url: 'bbs/{{page}}.html',
+      options: {
+        context: {
+          id: '{{id}}'
+        }
+      }      
     },
     {
       path: '/single/',

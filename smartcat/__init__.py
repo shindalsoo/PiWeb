@@ -36,12 +36,18 @@ def pages(page):
 def contents(page):
     return render_template('/contents/'+page)
 
-@app.route('/bbs/<page>')
+@app.route('/bbs/<page>',methods=['POST','GET'])
 def bbs(page):
-    all_data = LangAlarmWord.query.order_by(LangAlarmWord.id.desc()).all()
-    return render_template('/bbs/'+page, langwords = all_data)
+    id = request.args.get('id','0')
+    if page == 'list.html':
+        read_data = LangAlarmWord.query.order_by(LangAlarmWord.id.desc()).all()
+    elif page=='insert.html':
+        read_data = ()
+    elif page=='update.html':
+        read_data = LangAlarmWord.query.get(id)
+    return render_template('/bbs/'+page, langwords = read_data)
 
-@app.route('/bbs_insert', methods=['POST'])
+@app.route('/bbs_save_insert', methods=['POST'])
 def bbsinsert():
     category = request.form['category']
     word = request.form['word']
@@ -49,4 +55,13 @@ def bbsinsert():
     newWord = LangAlarmWord(category,word,memo)
     db.session.add(newWord)
     db.session.commit()
-    return "success"
+    return "insert success"
+
+@app.route('/bbs_save_update', methods=['POST'])
+def bbsupdate():
+    updateWord = LangAlarmWord.query.get(request.form.get('id'))
+    updateWord.category = request.form['category']
+    updateWord.word = request.form['word']
+    updateWord.memo = request.form['memo']
+    db.session.commit()
+    return "update success"

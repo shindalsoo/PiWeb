@@ -10,7 +10,7 @@
       </div>
       <div class="title">알람 영어 단어장</div>
       <div class="right">
-        <a href="/bbs/add" class="link add">
+        <a href="/bbs/insert/0" class="link add">
           <i class="f7-icons">plus</i>
           <span>등록</span>
         </a>
@@ -23,7 +23,7 @@
 
         {% for row in langwords %}
         <li>
-          <a href="/single/">
+          <a href="/bbs/update/{{row.id}}">
             <div class="item-content">
               <div class="item-media"><img src="{{url_for('static',filename='img/thumb-11.jpg')}}" alt=""></div>
               <div class="item-inner">
