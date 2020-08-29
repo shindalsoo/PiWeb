@@ -11,9 +11,15 @@ function fBbsWriteSave (opt,id) {
 	} else if (formData.word == '') {
 		app.dialog.alert ('단어를 입력하세요.', '입력오류');
 	} else {
-    app.request.post ('/bbs_save_'+opt+'/'+id, formData, function (data) {
-      console.log(data);
-      discoverView.router.back({force : true, ignoreCache : true, reload : true});
+		switch(opt){
+			case 'insert':
+				url = '/bbs_save_insert';break;
+			case 'update':
+				url = '/bbs_save_update/'+id;break;
+		}
+	    app.request.post (url, formData, function (data) {
+    	console.log(data);
+      	discoverView.router.back({force : true, ignoreCache : true, reload : true});
     });
 
     // app.request.post ('/bbs/insert', formData, function (data) {	

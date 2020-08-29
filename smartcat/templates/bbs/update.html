@@ -8,10 +8,10 @@
       <div class="contact-container">
         <div class="contact-icon"><i class="f7-icons">envelope_open_fill</i></div>
         <h1>단어 수정</h1>
-        <form id="form-bbs-save" method="POST">
-          <input type="hidden" name="dd" value="{{langwords.id}}">
         <div class="list no-hairlines custom-form contact-form">
           <ul>
+          <form id="form-bbs-save" method="POST">
+            <input type="hidden" name="dd" value="{{langwords.id}}">
             <li class="item-content item-input">
               <div class="item-inner">
                 <div class="item-input-wrap">
@@ -36,10 +36,10 @@
                 </div>
               </div>
             </li>
+          </form>
           </ul>
         </div>
         <a class="big-button button button-fill bbswrite-save" href="javascript:fBbsWriteSave('update','{{langwords.id}}')"><i class="f7-icons">paperplane_fill</i>저장</a>
-        </form>
       </div>
     </div>
   </div>

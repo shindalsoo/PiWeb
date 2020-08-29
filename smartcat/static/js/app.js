@@ -22,12 +22,10 @@ var app = new Framework7({
     },
     {
       path: '/bbs/:page/:id',
-      url: 'bbs/{{page}}.html',
+      url: 'bbs/{{page}}.html?id={{id}}',
       options: {
-        context: {
-          id: '{{id}}'
-        }
-      }      
+        ignoreCache:true
+      }
     },
     {
       path: '/single/',

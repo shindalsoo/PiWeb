@@ -57,9 +57,9 @@ def bbsinsert():
     db.session.commit()
     return "insert success"
 
-@app.route('/bbs_save_update', methods=['POST'])
-def bbsupdate():
-    updateWord = LangAlarmWord.query.get(request.form.get('id'))
+@app.route('/bbs_save_update/<id>', methods=['POST'])
+def bbsupdate(id):
+    updateWord = LangAlarmWord.query.get(id)
     updateWord.category = request.form['category']
     updateWord.word = request.form['word']
     updateWord.memo = request.form['memo']
