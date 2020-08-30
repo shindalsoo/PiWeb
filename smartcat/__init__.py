@@ -85,5 +85,8 @@ def playvoice(id):
     tts = gTTS(text=text, lang='ko')
     tts.save(filename)
     os.system(f'start {filename}')
-
     return "고양이가 소리를 냈습니다."
+
+@app.route('/movement/list.html')
+def movement_list():
+    return render_template('/movement/list.html')

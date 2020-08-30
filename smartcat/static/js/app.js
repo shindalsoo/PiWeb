@@ -35,8 +35,8 @@ var app = new Framework7({
       }
     },
     {
-      path: '/single/',
-      url: 'pages/single.html',
+      path: '/movement/list',
+      url: 'movement/list.html',
     },
     {
       path: '/single-2/',
