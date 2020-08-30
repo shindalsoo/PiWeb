@@ -1,6 +1,8 @@
 import datetime
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from gtts import gTTS
+import os
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
@@ -72,3 +74,16 @@ def bbsdelete(id):
     db.session.delete(delWord)
     db.session.commit()
     return "update success"
+
+@app.route('/playvoice/<id>')
+def playvoice(id):
+    readWord = LangAlarmWord.query.get(id)
+    text = readWord.category
+    text = text + readWord.word
+    text = text + readWord.memo
+    filename = "hellosmartcat.mp3"
+    tts = gTTS(text=text, lang='ko')
+    tts.save(filename)
+    os.system(f'start {filename}')
+
+    return "고양이가 소리를 냈습니다."

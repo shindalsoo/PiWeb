@@ -28,6 +28,13 @@ var app = new Framework7({
       }
     },
     {
+      path: '/playvoice/:id',
+      url: '/playvoice/{{id}}',
+      options: {
+        ignoreCache:true
+      }
+    },
+    {
       path: '/single/',
       url: 'pages/single.html',
     },
