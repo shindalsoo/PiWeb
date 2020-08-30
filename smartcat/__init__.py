@@ -65,3 +65,10 @@ def bbsupdate(id):
     updateWord.memo = request.form['memo']
     db.session.commit()
     return "update success"
+
+@app.route('/bbs_save_delete/<id>', methods=['POST'])
+def bbsdelete(id):
+    delWord = LangAlarmWord.query.get(id)
+    db.session.delete(delWord)
+    db.session.commit()
+    return "update success"
