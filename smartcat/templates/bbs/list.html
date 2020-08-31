@@ -21,6 +21,21 @@
     <div class="block">
       <ul class="list media-list post-list">
 
+        <li class="item-content item-input item-input-with-value">
+          <div class="item-media"><img src="{{url_for('static',filename='img/discover/alarm_clock.jpg')}}" alt=""></div>
+          <div class="item-inner">
+            <div class="item-subtitle">알람시간 설정</div>
+            <div class="item-input-wrap">
+              <input name="date" type="datetime-local" placeholder="시간을 선택하세요..." class="input-with-value">
+            </div>
+            <div class="item-body">현재, 알람이 설정되지 않았습니다.</div>
+            <div class="item-subtitle bottom-subtitle">
+              <button class="col button button-small button-round button-fill">저장</button>
+              <button class="col button button-small button-round button-fill" style="margin-left:6px;">듣기</button>
+            </div>
+          </div>
+        </li>
+
         {% for row in langwords %}
         <li>
           <a href="/bbs/update/{{row.id}}">
@@ -30,7 +45,7 @@
                 <div class="item-subtitle">{{row.category}}</div>
                 <div class="item-title">{{row.word}}</div>
                 <div class="item-body">{{row.memo}}</div>
-                <div class="item-subtitle bottom-subtitle"><i class="f7-icons">clock</i></i>{{row.regdate}}</div>
+                <div class="item-subtitle bottom-subtitle"><i class="f7-icons">clock</i>{{row.regdate}}</div>
               </div>
             </div>
           </a>
