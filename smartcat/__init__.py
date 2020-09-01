@@ -77,10 +77,18 @@ def bbsdelete(id):
 
 @app.route('/playvoice/<id>')
 def playvoice(id):
-    readWord = LangAlarmWord.query.get(id)
-    text = readWord.category
-    text = text + readWord.word
-    text = text + readWord.memo
+    if str(id)=="0":
+        readWord = LangAlarmWord.query.order_by(LangAlarmWord.id.desc()).all()
+        text = ""
+        for row in readWord:
+            text = text + row.category + ","
+            text = text + row.word + ","
+            text = text + row.memo + ","
+    else:
+        readWord = LangAlarmWord.query.get(id)
+        text = readWord.category + ","
+        text = text + readWord.word + ","
+        text = text + readWord.memo
     filename = "hellosmartcat.mp3"
     tts = gTTS(text=text, lang='ko')
     tts.save(filename)
