@@ -19,8 +19,7 @@
         {{row.email}}
         {{row.tel}}
         <input type="button" value="삭제" onclick="fDel({{row.userid}})">
-        <input type="button" value="수정">
-        
+        <input type="button" value="수정" onclick="fEdit({{row.userid}},'{{row.username}}','{{row.email}}','{{row.tel}}')">        
         <br>
     {% endfor %}
 
@@ -50,9 +49,6 @@ function fDel(uid){
 function fUpdate(){
     alert("수정할꺼니?");
 }
-
-
-
 function fEdit(userid,username,email,tel){
     var frm = document.frmEdit;
         frm.userid.value = userid;

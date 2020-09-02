@@ -1,11 +1,11 @@
-function fBbs_Save_Insert () {
+function fBbs_Save_Add () {
   	var formData = app.form.convertToData('#form-bbs-save');
 	if (formData.category == '') {
 		app.dialog.alert ('카테고리명을 입력하세요.', '입력오류');
 	} else if (formData.word == '') {
 		app.dialog.alert ('단어를 입력하세요.', '입력오류');
 	} else {
-		app.request.post ('/bbs_save_insert', formData, function (data) {
+		app.request.post ('/bbs_save_add', formData, function (data) {
 			console.log(data);
 			//fntoastTop ('gg');
 			//app.router.navigate('/bbs/list', {reloadCurrent:true})

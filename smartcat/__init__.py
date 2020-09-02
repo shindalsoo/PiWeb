@@ -11,6 +11,13 @@ app.config['SQlALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+class LangAlarmConf(db.Model):
+    __tablename__ = 'tblLangAlarmConf'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    alarmtime = db.Column(db.DateTime(timezone=True), default=datetime.datetime.now)
+    def __init__(self, alarmtime):
+        self.alarmtime = alarmtime
+
 class LangAlarmWord(db.Model):
     __tablename__ = 'tblLangAlarmWord'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -20,7 +27,6 @@ class LangAlarmWord(db.Model):
     cntplayed = db.Column(db.Integer, unique=False, nullable=True)
     useyn = db.Column(db.String(1), unique=False, nullable=True)
     regdate = db.Column(db.DateTime(timezone=True), default=datetime.datetime.now)
-
     def __init__(self, category, word, memo):
         self.category = category
         self.word = word
@@ -38,26 +44,34 @@ def pages(page):
 def contents(page):
     return render_template('/contents/'+page)
 
+@app.route('/bbs/list.html')
+def bbslist():
+    read_data = LangAlarmWord.query.all()
+    return render_template('/bbs/list.html',langwords = read_data) 
+
 @app.route('/bbs/<page>',methods=['POST','GET'])
 def bbs(page):
     id = request.args.get('id','0')
     if page == 'list.html':
+        conf_data = LangAlarmWord.query.all()
         read_data = LangAlarmWord.query.order_by(LangAlarmWord.id.desc()).all()
-    elif page=='insert.html':
+        return render_template('/bbs/'+page, langwords = read_data, alarmconf = conf_data)
+    elif page=='add.html':
         read_data = ()
+        return render_template('/bbs/'+page)
     elif page=='update.html':
         read_data = LangAlarmWord.query.get(id)
-    return render_template('/bbs/'+page, langwords = read_data)
+        return render_template('/bbs/'+page, langwords = read_data)
 
-@app.route('/bbs_save_insert', methods=['POST'])
-def bbsinsert():
+@app.route('/bbs_save_add', methods=['POST'])
+def bbsadd():
     category = request.form['category']
     word = request.form['word']
     memo = request.form['memo']
     newWord = LangAlarmWord(category,word,memo)
     db.session.add(newWord)
     db.session.commit()
-    return "insert success"
+    return "add success"
 
 @app.route('/bbs_save_update/<id>', methods=['POST'])
 def bbsupdate(id):

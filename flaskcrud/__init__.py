@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from gtts import gTTS
+from playsound import playsound
 from flask import Flask, render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 
