@@ -91,7 +91,7 @@ def bbsdelete(id):
 def udfTtsPlay(text):
     r1 = random.randint(1,10000000)
     r2 = random.randint(1,10000000)
-    filename = str(r2)+"randomtext"+str(r1)+".mp3"
+    filename = "/temp/"+str(r2)+"randomtext"+str(r1)+".mp3" # c:\temp에 쌓이네 쩝
     tts = gTTS(text=text, lang='ko')
     tts.save(filename)
 
@@ -99,9 +99,9 @@ def udfTtsPlay(text):
     pygame.mixer.music.load(filename)
     pygame.mixer.music.set_volume(1.0)
     pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy() == True:
-        pass
-
+    # 일단 밑코드로 흐르게 하자.
+    # while pygame.mixer.music.get_busy() == True:
+    #     pass
     # os.remove(filename) # Access Denide남
 
 @app.route('/playvoice/<id>')
