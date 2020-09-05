@@ -39,6 +39,10 @@ var app = new Framework7({
       url: 'movement/list.html',
     },
     {
+      path: '/lcd/list',
+      url: 'lcd/list.html',
+    },
+    {
       path: '/single-2/',
       url: 'pages/single-2.html',
     },

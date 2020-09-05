@@ -1,8 +1,7 @@
-import datetime
+import datetime, random, pygame, os
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from gtts import gTTS
-import os
 
 app = Flask(__name__)
 app.secret_key = "Secret Key"
@@ -89,6 +88,22 @@ def bbsdelete(id):
     db.session.commit()
     return "update success"
 
+def udfTtsPlay(text):
+    r1 = random.randint(1,10000000)
+    r2 = random.randint(1,10000000)
+    filename = str(r2)+"randomtext"+str(r1)+".mp3"
+    tts = gTTS(text=text, lang='ko')
+    tts.save(filename)
+
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.set_volume(1.0)
+    pygame.mixer.music.play()
+    while pygame.mixer.music.get_busy() == True:
+        pass
+
+    # os.remove(filename) # Access Denide남
+
 @app.route('/playvoice/<id>')
 def playvoice(id):
     if str(id)=="0":
@@ -103,12 +118,14 @@ def playvoice(id):
         text = readWord.category + ","
         text = text + readWord.word + ","
         text = text + readWord.memo
-    filename = "hellosmartcat.mp3"
-    tts = gTTS(text=text, lang='ko')
-    tts.save(filename)
-    os.system(f'start {filename}')
+    
+    udfTtsPlay(text)
     return "고양이가 소리를 냈습니다."
 
 @app.route('/movement/list.html')
 def movement_list():
     return render_template('/movement/list.html')
+
+@app.route('/lcd/list.html')
+def lcd_list():
+    return render_template('/lcd/list.html')

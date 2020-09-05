@@ -1,0 +1,49 @@
+<div class="page author no-navbar" data-name="author">
+  <div class="page-content">
+    <a href="#" class="link back close-button">
+      <img src="{{url_for('static',filename='img/close.svg')}}" alt="Close">
+    </a>
+    <div class="oval"></div>
+    <div class="block">
+      <div class="author-infos">
+        <img class="author-avatar" src="{{url_for('static',filename='img/discover/lcd_front_120x120.jpg')}}" alt="">
+        <div class="author-name">LCD 판넬을 품은 고양이</div>
+        <div class="author-description">2줄짜리 1602 LCD 디스플레이를 장착했습니다.</div>
+      </div>
+      <div class="count-container">
+        <div class="count-block">
+          <div class="count-number">217</div>
+          <div class="count-label">Posts</div>
+        </div>
+        <div class="count-block">
+          <div class="count-number">87</div>
+          <div class="count-label">Comments</div>
+        </div>
+        <div class="count-block">
+          <div class="count-number">1.2k</div>
+          <div class="count-label">Likes</div>
+        </div>
+      </div>
+      <div class="title-medium-container title-with-link">
+        <h2>고정 표시 출력</h2>
+      </div>
+      <ul class="list media-list post-list">
+        {% for i in range(0,10) %}
+        <li>
+          <a href="/single/">
+            <div class="item-content">
+              <div class="item-media"><img src="{{url_for('static',filename='img/thumb-25.jpg')}}" alt=""></div>
+              <div class="item-inner">
+                <div class="item-subtitle">시스템정보</div>
+                <div class="item-title">현재 시간과 연결된 IP정보를 출력</div>
+                <div class="item-subtitle bottom-subtitle"><i class="f7-icons">clock</i></i>2 hours ago</div>
+              </div>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+        
+      </ul>
+    </div>
+  </div>
+</div>
